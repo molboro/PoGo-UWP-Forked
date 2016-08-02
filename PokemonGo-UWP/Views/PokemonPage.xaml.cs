@@ -14,13 +14,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkId=234238 dokumentiert.
 
 namespace PokemonGo_UWP.Views
 {
-    /// <summary>
-    /// Eine leere Seite, die eigenständig verwendet oder zu der innerhalb eines Rahmens navigiert werden kann.
-    /// </summary>
     public sealed partial class PokemonPage : Page
     {
         public InventoryPokemonViewModel ViewModel { get; private set; }
