@@ -273,7 +273,8 @@
                     RelativePanel.AlignLeftWithPanel="True"
                     RelativePanel.AlignBottomWithPanel="True"
                     Margin="24,0,0,128"
-                    x:Name="PokemonButton">
+                    x:Name="PokemonButton"
+                    Command="{Binding ShowPokemonCommand}">
 
                 <Image Source="../Assets/Buttons/btn_empty.png"
                        Stretch="Uniform"

@@ -1,0 +1,74 @@
+﻿<Page
+    x:Class="PokemonGo_UWP.Views.PokemonDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PokemonGo_UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <ImageBrush x:Key="background" ImageSource="../Assets/Backgrounds/ui_bg_green_03.png" />
+    </Page.Resources>
+
+    <Grid Background="{StaticResource background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Image
+            Source="{Binding PokemonId, Converter={StaticResource PokemonIdToPokemonSpriteConverter}}"
+            Stretch="Uniform"
+            VerticalAlignment="Center"
+            Width="154"
+            Height="154"
+            Margin="3,0" />
+        
+        <Grid Grid.Row="1" Background="White" CornerRadius="20" Margin="10">
+            <StackPanel>
+                <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{Binding PokemonId}" TextAlignment="Center" Foreground="Black" Margin="0,10,0,5"/>
+                <ProgressBar IsIndeterminate="False" Value="{Binding StaminaPercentage}" Height="20" Margin="80,0,80,5"/>
+                <TextBlock TextAlignment="Center" Foreground="Black" Margin="0,5,0,5">
+                    HP <Run Text="{Binding Stamina}"/>/<Run Text="{Binding StaminaMax}"/>
+                </TextBlock>
+
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <!--Type-->
+                    <TextBlock Text="" TextAlignment="Center" Style="{StaticResource BaseTextBlockStyle}" Foreground="Black"/>
+                    <TextBlock Text="Type" TextAlignment="Center" Foreground="Black" Grid.Row="1"/>
+
+                    <!--Weight-->
+                    <TextBlock Text="{Binding Weight}" Grid.Column="1" TextAlignment="Center" Style="{StaticResource BaseTextBlockStyle}" Foreground="Black"/>
+                    <TextBlock Text="Weight" TextAlignment="Center" Foreground="Black" Grid.Row="1" Grid.Column="1"/>
+
+                    <!--Height-->
+                    <TextBlock Text="{Binding Height}" Grid.Column="2" TextAlignment="Center" Style="{StaticResource BaseTextBlockStyle}" Foreground="Black"/>
+                    <TextBlock Text="Height" TextAlignment="Center" Foreground="Black" Grid.Row="1" Grid.Column="2"/>
+                </Grid>
+            </StackPanel>
+
+
+        </Grid>
+
+        <Button Grid.RowSpan="3" Style="{ThemeResource ImageButtonStyle}"
+                    Height="{ThemeResource UiButtonSize}"
+                    HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                    Margin="0,0,0,12"
+                    Click="Button_Click">
+            <Image Source="../Assets/Buttons/btn_close_normal.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Stretch" />
+        </Button>
+    </Grid>
+</Page>

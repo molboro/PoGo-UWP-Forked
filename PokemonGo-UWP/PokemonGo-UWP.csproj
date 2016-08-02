@@ -325,6 +325,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Entities\FortDataWrapper.cs" />
+    <Compile Include="Entities\InventoryPokemonWrapper.cs" />
     <Compile Include="Entities\MapPokemonWrapper.cs" />
     <Compile Include="Entities\NearbyPokemonWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -339,6 +340,7 @@
     <Compile Include="Utils\UpdateManager.cs" />
     <Compile Include="ViewModels\CapturePokemonPageViewModel.cs" />
     <Compile Include="ViewModels\GameMapPageViewModel.cs" />
+    <Compile Include="ViewModels\InventoryPokemonViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\SearchPokeStopPageViewModel.cs" />
     <Compile Include="Views\CapturePokemonPage.xaml.cs">
@@ -352,6 +354,12 @@
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PokemonDetailPage.xaml.cs">
+      <DependentUpon>PokemonDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PokemonPage.xaml.cs">
+      <DependentUpon>PokemonPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchPokestopPage.xaml.cs">
       <DependentUpon>SearchPokestopPage.xaml</DependentUpon>
@@ -406,6 +414,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PokemonDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PokemonPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

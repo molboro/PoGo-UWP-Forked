@@ -29,6 +29,7 @@ namespace PokemonGo_UWP.Views
         public GameMapPage()
         {
             InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Enabled;
             //WindowWrapper.Current().Window.VisibilityChanged += (s, e) =>
             //{
             //    if (App.ViewModelLocator.GameManagerViewModel != null)
@@ -84,7 +85,7 @@ namespace PokemonGo_UWP.Views
         private void SubscribeToCaptureEvents()
         {
             GameClient.GeopositionUpdated += GeopositionUpdated;
-        }        
+        }
 
         private void UnsubscribeToCaptureEvents()
         {

@@ -44,7 +44,8 @@ namespace PokemonGo_UWP.ViewModels
             if (parameter is bool)
             {
                 // First time navigating here, we need to initialize data updating but only if we have GPS access
-                await Dispatcher.DispatchAsync(async () => { 
+                await Dispatcher.DispatchAsync(async () =>
+                {
                     var accessStatus = await Geolocator.RequestAccessAsync();
                     switch (accessStatus)
                     {
@@ -62,8 +63,8 @@ namespace PokemonGo_UWP.ViewModels
             if (suspensionState.Any())
             {
                 // Recovering the state                
-                PlayerProfile = (Profile) suspensionState[nameof(PlayerProfile)];
-                PlayerStats = (PlayerStats) suspensionState[nameof(PlayerStats)];                
+                PlayerProfile = (Profile)suspensionState[nameof(PlayerProfile)];
+                PlayerStats = (PlayerStats)suspensionState[nameof(PlayerStats)];
             }
             else
             {
@@ -103,6 +104,19 @@ namespace PokemonGo_UWP.ViewModels
         }
 
         #endregion
+
+        #region Commands
+
+        private DelegateCommand _showPokemonCommand;
+
+        public DelegateCommand ShowPokemonCommand => _showPokemonCommand ?? (
+            _showPokemonCommand = new DelegateCommand(() =>
+            {
+                BootStrapper.Current.NavigationService.Navigate(typeof(PokemonPage));
+            }));
+
+        #endregion
+
 
         #region Game Management Vars
 

@@ -60,6 +60,11 @@ namespace PokemonGo_UWP.Utils
         public static ObservableCollection<FortDataWrapper> NearbyPokestops { get; set; } = new ObservableCollection<FortDataWrapper>();
 
         /// <summary>
+        ///     Stores the current pokemons in "inventory"
+        /// </summary>
+        public static ObservableCollection<InventoryPokemonWrapper> InventoryPokemons { get; set; } = new ObservableCollection<InventoryPokemonWrapper>();
+
+        /// <summary>
         ///     Stores the current inventory
         /// </summary>
         public static ObservableCollection<Item> Inventory { get; set; } = new ObservableCollection<Item>();
@@ -107,13 +112,13 @@ namespace PokemonGo_UWP.Utils
             _geolocator = null;
             CatchablePokemons.Clear();
             NearbyPokemons.Clear();
-            NearbyPokestops.Clear();            
+            NearbyPokestops.Clear();
         }
 
         #endregion
 
         #region Data Updating
-        
+
         private static Geolocator _geolocator;
 
         public static Geoposition Geoposition { get; private set; }
@@ -176,7 +181,7 @@ namespace PokemonGo_UWP.Utils
                     await UpdateMapObjects();
                 }
 
-                UpdateDataMutex.ReleaseMutex();                
+                UpdateDataMutex.ReleaseMutex();
             };
             // Update before starting timer
             Busy.SetBusy(true, "Getting user data...");
@@ -209,7 +214,7 @@ namespace PokemonGo_UWP.Utils
             }
             var nearbyTmp = new List<NearbyPokemon>(mapObjects.MapCells.SelectMany(i => i.NearbyPokemons));
             Logger.Write($"Found {nearbyTmp.Count} nearby pokemons");
-            NearbyPokemons.Clear();           
+            NearbyPokemons.Clear();
             foreach (var pokemon in nearbyTmp)
             {
                 NearbyPokemons.Add(pokemon);
@@ -286,6 +291,15 @@ namespace PokemonGo_UWP.Utils
             {
                 Inventory.Add(item);
             }
+
+            await UpdateInventoryPokemons();
+        }
+
+        private static async Task UpdateInventoryPokemons()
+        {
+            var pokemonTmp = new List<PokemonData>(await InventoryWrapper.GetPokemons());
+            InventoryPokemons.Clear();
+            pokemonTmp.ForEach(a => InventoryPokemons.Add(new InventoryPokemonWrapper(a)));
         }
 
         #endregion
@@ -314,7 +328,7 @@ namespace PokemonGo_UWP.Utils
         /// <param name="captureItem"></param>
         /// <param name="latitude"></param>
         /// <returns></returns>
-        public static async Task<CatchPokemonResponse> CatchPokemon(ulong encounterId, string spawnpointId,  double latitude, double longitude, MiscEnums.Item captureItem)
+        public static async Task<CatchPokemonResponse> CatchPokemon(ulong encounterId, string spawnpointId, double latitude, double longitude, MiscEnums.Item captureItem)
         {
             return await Client.CatchPokemon(encounterId, spawnpointId, latitude, longitude, captureItem);
         }
