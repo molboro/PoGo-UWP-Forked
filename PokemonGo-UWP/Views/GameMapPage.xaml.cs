@@ -29,7 +29,15 @@ namespace PokemonGo_UWP.Views
         public GameMapPage()
         {
             InitializeComponent();
+
             NavigationCacheMode = NavigationCacheMode.Enabled;
+
+            Loaded += (s, e) =>
+            {
+                // TODO: find a proper way to center all the panels based on resolution
+                NearbyGridTranslateTransform.Y = ActualHeight*3/2;
+            };
+
             //WindowWrapper.Current().Window.VisibilityChanged += (s, e) =>
             //{
             //    if (App.ViewModelLocator.GameManagerViewModel != null)
@@ -75,7 +83,7 @@ namespace PokemonGo_UWP.Views
                 // TODO: set this to false on gesture
                 if (!_canUpdateMap) return;
                 GameMapControl.Center = position.Coordinate.Point;
-                if (position.Coordinate.Heading != null)
+                if (position.Coordinate.Heading != null && !double.IsNaN(position.Coordinate.Heading.Value))
                 {
                     GameMapControl.Heading = position.Coordinate.Heading.Value;
                 }
